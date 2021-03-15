@@ -19,21 +19,22 @@ Created on Mon Mar 15 10:42:01 2021
 #a 3-digit number goes from 100 to 999
 
 import numpy as np    
-n=np.arange(10,100,1)
+n=np.arange(100,1000,1)
 
 threeDig=n.reshape(len(n),1)@n.reshape(1, len(n))
 tD=threeDig.reshape(len(threeDig)**2,1)
 
+pal=[]
+
 for i in range(len(tD)):
-    cm=0#int(tD[i]/1e5)
-    dm=0#int((tD[i]-cm*1e5)/1e4)
+    cm=int(tD[i]/1e5)
+    dm=int((tD[i]-cm*1e5)/1e4)
     m=int((tD[i]-(cm*1e5+dm*1e4))/1e3)
     c=int((tD[i]-(cm*1e5+dm*1e4+m*1e3))/1e2) 
     d=int((tD[i]-(cm*1e5+dm*1e4+m*1e3+c*100))/10)  
     u=int(tD[i]-(cm*1e5+dm*1e4+m*1e3+c*100+d*10))    
     
-    #if ((cm==u)and(dm==d)and(m==c)):
-    if ((m==u)and(c==d)):
-        pal=tD[i]
+    if ((cm==u)and(dm==d)and(m==c)):
+        pal=pal+[int(tD[i])]
 
-print(pal)
+print(max(pal))
